@@ -1,6 +1,7 @@
 package com.example.quicktask.controllers;
 
 import com.example.quicktask.common.CommonResponseBean;
+import com.example.quicktask.dtos.LoginUserDTO;
 import com.example.quicktask.dtos.RegisterUserDTO;
 import com.example.quicktask.services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class AuthController {
         return authService.registerUser(DTO);
     }
     @PostMapping("/login")
-    public CommonResponseBean loginUser(@RequestBody RegisterUserDTO DTO) {
+    public CommonResponseBean loginUser(@RequestBody LoginUserDTO DTO) {
         return authService.loginUser(DTO);
     }
 }

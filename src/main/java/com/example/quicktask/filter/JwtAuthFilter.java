@@ -2,7 +2,6 @@ package com.example.quicktask.filter;
 
 import com.example.quicktask.security.CustomUserDetailsService;
 import com.example.quicktask.security.JwtService;
-import com.example.quicktask.security.SecurityConfig;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

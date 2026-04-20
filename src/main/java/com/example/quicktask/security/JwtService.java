@@ -19,7 +19,7 @@ import java.util.function.Function;
 @Component
 public class JwtService {
 
-    @Value("${jwt.secretkey}")
+    @Value("${jwt.secret}")
     private String SECRET;
 
     @Value("${jwt.expiration}")
@@ -66,7 +66,7 @@ public class JwtService {
 
     // Check if token expired
     private boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Data());
+        return extractExpiration(token).before(new Date());
     }
 
     // Final Validation - is email matching + not expired?
