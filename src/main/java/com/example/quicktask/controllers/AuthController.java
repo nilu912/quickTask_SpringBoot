@@ -18,11 +18,11 @@ public class AuthController {
     public AuthService authService;
 
     @PostMapping("/register")
-    public CommonResponseBean registerUser(@RequestBody RegisterUserDTO DTO) {
-        return authService.registerUser(DTO);
+    public CommonResponseBean registerUser(@RequestBody RegisterUserDTO dto) {
+        return authService.registerUser(dto);
     }
     @PostMapping("/login")
-    public CommonResponseBean loginUser(@RequestBody LoginUserDTO DTO) {
-        return authService.loginUser(DTO);
+    public CommonResponseBean loginUser(@RequestBody LoginUserDTO dto) {
+        return authService.loginUser(dto);
     }
 }

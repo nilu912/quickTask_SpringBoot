@@ -1,7 +1,8 @@
 package com.example.quicktask.serviceImpls;
 
 //import com.example.quicktask.common.CheckNullAndEmpty;
-import com.example.quicktask.common.CheckNullAndEmpty;
+import com.example.quicktask.common.Common;
+import com.example.quicktask.common.CommonEnum;
 import com.example.quicktask.common.CommonResponseBean;
 import com.example.quicktask.dtos.LoginUserDTO;
 import com.example.quicktask.dtos.RegisterUserDTO;
@@ -39,15 +40,15 @@ public class AuthServiceImpl implements AuthService {
     public CommonResponseBean registerUser(RegisterUserDTO dto) {
         try {
 //            if(dto.getEmail() == null || dto.getEmail().isEmpty() || dto.getPassword() == null || dto.getPassword().isEmpty() || dto.getUsername() == null ||dto.getUsername().isEmpty() || dto.getAge().toString() == null || dto.getAge().toString().isEmpty() || dto.getAddress().isEmpty())
-            if(CheckNullAndEmpty.isNullAndEmpty(dto.getEmail()) ||
-                    CheckNullAndEmpty.isNullAndEmpty(dto.getPassword()) ||
-                    CheckNullAndEmpty.isNullAndEmpty(dto.getName()) ||
-                    CheckNullAndEmpty.isNullAndEmpty(dto.getAddress()) ||
-                    CheckNullAndEmpty.isNullAndEmpty(dto.getAge()))
+            if(Common.isNullAndEmpty(dto.getEmail()) ||
+                    Common.isNullAndEmpty(dto.getPassword()) ||
+                    Common.isNullAndEmpty(dto.getName()) ||
+                    Common.isNullAndEmpty(dto.getAddress()) ||
+                    Common.isNullAndEmpty(dto.getAge()))
                 return new CommonResponseBean(false, 404, "parameter is missing", null);
 
             Optional<User> existingUser = userRepository.findByEmail(dto.getEmail());
-            if(existingUser != null)
+            if(existingUser.isPresent())
                 return new CommonResponseBean(false, 5000, "email id already exist", null);
 
             User user = new User();
@@ -57,9 +58,12 @@ public class AuthServiceImpl implements AuthService {
             user.setPassword(passwordEncoder.encode(dto.getPassword()));
             user.setAge(dto.getAge());
             user.setAddress(dto.getAddress());
+            if (dto.getRole() == null)
+             user.setRole(CommonEnum.USER.getValue());
+            else user.setRole(dto.getRole());
             userRepository.save(user);
 
-            return new CommonResponseBean(true, 200, "", dto);
+            return new CommonResponseBean(true, 200, "", user);
         } catch (Exception e) {
             System.out.println("Registration error"+ e);
         }
@@ -69,7 +73,7 @@ public class AuthServiceImpl implements AuthService {
     public CommonResponseBean loginUser(LoginUserDTO dto) {
         try {
 //            if(dto.getEmail() == null || dto.getPassword() == null || dto.getEmail().isEmpty() || dto.getPassword().isEmpty())
-            if(CheckNullAndEmpty.isNullAndEmpty(dto.getEmail()) || CheckNullAndEmpty.isNullAndEmpty(dto.getPassword()))
+            if(Common.isNullAndEmpty(dto.getEmail()) || Common.isNullAndEmpty(dto.getPassword()))
                 return new CommonResponseBean(false, 404, "parameter is missing", null);
 
             // step 1 - Verify Credentials

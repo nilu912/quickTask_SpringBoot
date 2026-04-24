@@ -44,7 +44,7 @@ public class JwtService {
         return Jwts.parserBuilder()
                 .setSigningKey(getSignKey())        //we use the same key which we use at time of creating token
                 .build()
-                .parseClaimsJwt(token)     // verify signature + parse
+                .parseClaimsJws(token)     // verify signature + parse
                 .getBody();             //Give me the payload as Claims object
     }
 

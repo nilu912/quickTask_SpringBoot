@@ -5,7 +5,7 @@ package com.example.quicktask.common;
 //
 //@NoArgsConstructor
 //@AllArgsConstructor
-public class CheckNullAndEmpty {
+public class Common {
 //    private Object value;
 //    public CheckNullAndEmpty(Object obj) {
 //        this.value = obj;
