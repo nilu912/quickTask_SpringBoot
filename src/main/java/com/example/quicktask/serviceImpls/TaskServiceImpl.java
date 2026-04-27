@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class TaskServiceImpl implements TaskService {
 
     @Override
-    public CommonResponseBean addTask(TaskRequestDTO dto) {
+    public CommonResponseBean createTask(TaskRequestDTO dto) {
         try {
             System.out.println(dto);
         } catch (Exception e) {

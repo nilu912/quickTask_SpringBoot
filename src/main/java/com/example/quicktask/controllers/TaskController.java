@@ -10,18 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/tasks")
 public class TaskController {
 
     @Autowired
     private TaskService taskService;
 
-    @PostMapping("/getproduct")
-    CommonResponseBean getProducts(@RequestBody TaskRequestDTO dto) {
+    @PostMapping("/gettask")
+    CommonResponseBean getTask(@RequestBody TaskRequestDTO dto) {
         return taskService.getTask(dto);
     }
-    @PostMapping("/setproduct")
-    CommonResponseBean addProduct(@RequestBody TaskRequestDTO dto) {
-        return taskService.addTask(dto);
+    @PostMapping("/createtask")
+    CommonResponseBean createTask(@RequestBody TaskRequestDTO dto) {
+        return taskService.createTask(dto);
     }
 }
